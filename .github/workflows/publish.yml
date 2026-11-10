@@ -23,15 +23,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - name: Verify tag matches the crate version
+      - name: Verify tag matches the package version
         if: github.event_name == 'push'
         shell: bash
         run: |
           TAG="${GITHUB_REF#refs/tags/v}"
-          CARGO_VER=$(grep -m1 '^version = ' Cargo.toml | cut -d'"' -f2)
-          echo "tag=$TAG crate=$CARGO_VER"
-          if [ "$TAG" != "$CARGO_VER" ]; then
-            echo "::error::Tag version ($TAG) does not match crate version ($CARGO_VER)"
+          PKG_VER=$(grep -m1 '^version = ' pyproject.toml | cut -d'"' -f2)
+          echo "tag=$TAG package=$PKG_VER"
+          if [ "$TAG" != "$PKG_VER" ]; then
+            echo "::error::Tag version ($TAG) does not match pyproject.toml version ($PKG_VER)"
             exit 1
           fi
 
