@@ -1,0 +1,33 @@
+[build-system]
+requires = ["maturin>=1.7,<2"]
+build-backend = "maturin"
+
+[project]
+name = "pymqttd"
+description = "A small MQTT 3.1.1 broker (rumqttd) packaged as a pip-installable executable, with a Python launcher."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+dynamic = ["version"]
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: 3",
+    "Topic :: Communications",
+    "Topic :: Internet",
+]
+
+[project.urls]
+Repository = "https://github.com/3735943886/pymqttd"
+
+[project.optional-dependencies]
+test = ["pytest", "pytest-asyncio", "paho-mqtt>=2.0"]
+
+[tool.maturin]
+bindings = "bin"
+python-source = "python"
+module-name = "pymqttd"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]

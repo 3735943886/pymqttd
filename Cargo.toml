@@ -1,0 +1,25 @@
+[package]
+name = "pymqttd"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "A small MQTT 3.1.1 broker (rumqttd) packaged as a pip-installable executable."
+repository = "https://github.com/3735943886/pymqttd"
+readme = "README.md"
+publish = false
+
+[[bin]]
+name = "pymqttd"
+path = "src/main.rs"
+
+[dependencies]
+# No TLS and no websocket: a local broker for apps on the same host.
+rumqttd = { version = "=0.20.0", default-features = false }
+clap = { version = "4.5", features = ["derive"] }
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
