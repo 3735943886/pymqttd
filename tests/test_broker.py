@@ -151,6 +151,11 @@ async def test_credentials_refuse_anonymous_clients():
         assert connected(client(broker.port, "authed", username="u", password="p"), broker.port)
 
 
+async def test_credentials_may_start_with_a_dash():
+    async with pymqttd.Broker(username="-u", password="-Abc") as broker:
+        assert connected(client(broker.port, "authed", username="-u", password="-Abc"), broker.port)
+
+
 async def test_a_taken_port_is_an_error():
     with socket.socket() as taken:
         taken.bind(("127.0.0.1", 0))

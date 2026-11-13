@@ -74,7 +74,8 @@ class _Options:
     def command(self, port: int) -> list[str]:
         cmd = [self.executable or find_executable(), "--host", self.host, "--port", str(port), "--exit-on-stdin-close"]
         if self.username is not None:
-            cmd += ["--username", self.username, "--password", self.password]
+            # `--name=value`: a value starting with "-" would otherwise be read as a flag
+            cmd += [f"--username={self.username}", f"--password={self.password}"]
         if self.max_payload_size is not None:
             cmd += ["--max-payload-size", str(self.max_payload_size)]
         if self.log is not None:

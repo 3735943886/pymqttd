@@ -4,7 +4,7 @@ build-backend = "maturin"
 
 [project]
 name = "pymqttd"
-version = "0.1.0.dev0"      # the wheel's; Cargo.toml's is the executable's (`pymqttd --version`)
+version = "0.1.0"      # the wheel's; Cargo.toml's is the executable's (`pymqttd --version`)
 description = "A small MQTT 3.1.1 broker (rumqttd) packaged as a pip-installable executable, with a Python launcher."
 readme = "README.md"
 requires-python = ">=3.11"
